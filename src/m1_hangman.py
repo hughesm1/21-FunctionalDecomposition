@@ -12,13 +12,20 @@ import random
 
 
 def main():
+    print("You can guess 4 incorrect times before you lose")
+    count = 0
     anything = []
     x = rand_word()
     initial_dashes(x)
-    for k in range(3):
+    # for k in range(len(x) + 4):
+    while True:
         true_false, kval = guess(x)
-        anything = anything + [kval]
+        for h in range(len(kval)):
+            anything = anything + [kval[h]]
         dashes(x, kval, anything)
+        if count > len(x) + 4:
+            print("congrats, you won!")
+            break
 
 
 def rand_word():
@@ -37,11 +44,14 @@ def rand_word():
 
 
 def guess(word):
+    kk = []
     guess1 = input('What letter do you want to try?')
     for k in range(len(word)):
         if word[k] == guess1:
-            print(word[k])
-            return True, k
+            kk = kk + [k]
+    return True, kk
+        # else:
+        #     input("wrong guess, input something else")
 
 
 
@@ -49,11 +59,9 @@ def dashes(word, kval, anything):
     dash = []
     for k in range(len(word)):
         dash = dash + ['-']
-    for u in range(len(anything) + 1):
-        dash[kval] = word[kval]
-    print(kval)
-    print(anything[0])
-    print(word[0])
+    for u in range(len(anything)):
+        index = anything[u]
+        dash[index] = word[index]
     print(dash)
 
 
@@ -62,7 +70,9 @@ def initial_dashes(word):
     for k in range(len(word)):
         dash = dash + ['-']
 
-
+# def find_indices(word, kval):
+#     for k in range(len(word)):
+#         if
 
 
 
