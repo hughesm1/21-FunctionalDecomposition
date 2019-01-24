@@ -13,7 +13,7 @@ import random
 
 def main():
     print("You can guess 4 incorrect times before you lose")
-    count = 0
+    wrongcount = 0
     anything = []
     x = rand_word()
     initial_dashes(x)
@@ -24,7 +24,7 @@ def main():
             anything = anything + [kval[h]]
         dash = dashes(x, kval, anything)
         finished(dash, x)
-        if count > len(x) + 4 or finished(dash, x) == True:
+        if wrongcount > 4 or finished(dash, x) == True:
             print("congrats, you won!")
             break
 
@@ -50,10 +50,10 @@ def guess(word):
     for k in range(len(word)):
         if word[k] == guess1:
             kk = kk + [k]
+        else:
+            if k == 0:
+                wrongnumber = wrongnumber + 1
     return True, kk
-        # else:
-        #     input("wrong guess, input something else")
-
 
 
 def dashes(word, kval, anything):
@@ -71,6 +71,7 @@ def initial_dashes(word):
     dash = []
     for k in range(len(word)):
         dash = dash + ['-']
+
 
 def finished(dash, word):
     for k in range(len(word)):
