@@ -17,7 +17,7 @@ def main():
     initial_dashes(x)
     for k in range(3):
         true_false, kval = guess(x)
-        anything = anything + [kval + 1]
+        anything = anything + [kval]
         dashes(x, kval, anything)
 
 
@@ -52,7 +52,8 @@ def dashes(word, kval, anything):
     for u in range(len(anything) + 1):
         dash[kval] = word[kval]
     print(kval)
-    print(anything)
+    print(anything[0])
+    print(word[0])
     print(dash)
 
 
