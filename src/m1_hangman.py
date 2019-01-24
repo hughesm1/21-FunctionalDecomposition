@@ -22,8 +22,9 @@ def main():
         true_false, kval = guess(x)
         for h in range(len(kval)):
             anything = anything + [kval[h]]
-        dashes(x, kval, anything)
-        if count > len(x) + 4:
+        dash = dashes(x, kval, anything)
+        finished(dash, x)
+        if count > len(x) + 4 or finished(dash, x) == True:
             print("congrats, you won!")
             break
 
@@ -35,7 +36,7 @@ def rand_word():
         words = string.split()
     r = random.randrange(0, len(words))
     word = words[r]
-    print(word)
+    # print(word)
     return word
 
 # def word_length():
@@ -63,6 +64,7 @@ def dashes(word, kval, anything):
         index = anything[u]
         dash[index] = word[index]
     print(dash)
+    return dash
 
 
 def initial_dashes(word):
@@ -70,10 +72,11 @@ def initial_dashes(word):
     for k in range(len(word)):
         dash = dash + ['-']
 
-# def find_indices(word, kval):
-#     for k in range(len(word)):
-#         if
-
+def finished(dash, word):
+    for k in range(len(word)):
+        if dash[k] == '-':
+            return False
+    return True
 
 
 
