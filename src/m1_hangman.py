@@ -13,7 +13,6 @@ import random
 
 def main():
     print("You can guess as many times as you want")
-    wrongcount = 0
     anything = []
     x = rand_word()
     initial_dashes(x)
@@ -26,9 +25,6 @@ def main():
         finished(dash, x)
         if finished(dash, x):
             print("congrats, you won!")
-            break
-        if wrongcount > 4:
-            print("you lose!")
             break
 
 
