@@ -12,20 +12,23 @@ import random
 
 
 def main():
-    print("You can guess 4 incorrect times before you lose")
+    print("You can guess as many times as you want")
     wrongcount = 0
     anything = []
     x = rand_word()
     initial_dashes(x)
-    # for k in range(len(x) + 4):
+    dashes(x, anything)
     while True:
         true_false, kval = guess(x)
         for h in range(len(kval)):
             anything = anything + [kval[h]]
-        dash = dashes(x, kval, anything)
+        dash = dashes(x, anything)
         finished(dash, x)
-        if wrongcount > 4 or finished(dash, x) == True:
+        if finished(dash, x):
             print("congrats, you won!")
+            break
+        if wrongcount > 4:
+            print("you lose!")
             break
 
 
@@ -36,12 +39,7 @@ def rand_word():
         words = string.split()
     r = random.randrange(0, len(words))
     word = words[r]
-    # print(word)
     return word
-
-# def word_length():
-#     variable = input('Minimum length of word')
-#     if variable
 
 
 def guess(word):
@@ -50,13 +48,10 @@ def guess(word):
     for k in range(len(word)):
         if word[k] == guess1:
             kk = kk + [k]
-        else:
-            if k == 0:
-                wrongnumber = wrongnumber + 1
     return True, kk
 
 
-def dashes(word, kval, anything):
+def dashes(word, anything):
     dash = []
     for k in range(len(word)):
         dash = dash + ['-']
@@ -78,7 +73,6 @@ def finished(dash, word):
         if dash[k] == '-':
             return False
     return True
-
 
 
 main()
