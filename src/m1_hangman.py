@@ -12,7 +12,16 @@ import random
 
 
 def main():
+    while True:
+        yep = loopy_loop()
+        if play_again(yep) == False:
+            print('ok bye')
+            break
+
+
+def loopy_loop():
     print("You can guess as many times as you want")
+    yep = ''
     anything = []
     x = rand_word()
     initial_dashes(x)
@@ -25,7 +34,9 @@ def main():
         finished(dash, x)
         if finished(dash, x):
             print("congrats, you won!")
-            break
+            # print("do you want to play again (y,n)")
+            yep = input('do you want to play again(y,n)')
+        return yep
 
 
 def rand_word():
@@ -71,4 +82,11 @@ def finished(dash, word):
     return True
 
 
+def play_again(yep):
+    if "y" == yep:
+        return True
+    elif "n" == yep:
+        return False
+    else:
+        return input('you didnt put the right thing in, do it again')
 main()
