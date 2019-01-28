@@ -12,31 +12,45 @@ import random
 
 
 def main():
-    while True:
-        yep = loopy_loop()
-        if play_again(yep) == False:
-            print('ok bye')
-            break
+    mhmm = True
+    # count = 0
+    while mhmm:
+        print("You have 5 incorrect guesses before you lose")
+        yep = ''
+        anything = []
+        x = rand_word()
+        # str(initial_dashes(x))
+        str(dashes(x, anything))
+        # while mhmm:
+        yep = loopy_loop(x, anything, yep, mhmm)
+        mhmm = play_again(yep)
+    print("thanks for playing")
+    # while True:
+    #     yep = loopy_loop(x, anything, yep)
+    #     if yep != '':
+    #         if play_again(yep) == False:
+    #             print('ok bye')
+    #             break
 
 
-def loopy_loop():
-    print("You can guess as many times as you want")
-    yep = ''
-    anything = []
-    x = rand_word()
-    initial_dashes(x)
-    dashes(x, anything)
-    while True:
-        true_false, kval = guess(x)
+
+
+def loopy_loop(x, anything, yep, mhmm):
+    count = 0
+    while mhmm:
+        true_false, kval, count = guess(x, count)
         for h in range(len(kval)):
             anything = anything + [kval[h]]
         dash = dashes(x, anything)
-        finished(dash, x)
+        print('you have ', count, ' incorrect guesses, you have, ', 5-count, ' guesses left before you lose')
         if finished(dash, x):
             print("congrats, you won!")
-            # print("do you want to play again (y,n)")
             yep = input('do you want to play again(y,n)')
-        return yep
+            return yep
+        if count == 5:
+            print('you lose!')
+            yep = input('do you want to play again(y,n)')
+            return yep
 
 
 def rand_word():
@@ -49,13 +63,18 @@ def rand_word():
     return word
 
 
-def guess(word):
+def guess(word, count):
     kk = []
+    lenk = 0
     guess1 = input('What letter do you want to try?')
     for k in range(len(word)):
         if word[k] == guess1:
             kk = kk + [k]
-    return True, kk
+    if len(kk) == lenk:
+        count = count + 1
+    lenk = len(kk)
+
+    return True, kk, count
 
 
 def dashes(word, anything):
@@ -65,7 +84,7 @@ def dashes(word, anything):
     for u in range(len(anything)):
         index = anything[u]
         dash[index] = word[index]
-    print(dash)
+    print(str(dash))
     return dash
 
 
@@ -88,5 +107,13 @@ def play_again(yep):
     elif "n" == yep:
         return False
     else:
-        return input('you didnt put the right thing in, do it again')
+        print('you didnt put the right thing in, do it again')
+        while True:
+            wow = input('put either y or n')
+            if wow == 'y':
+                return True
+            elif wow == 'n':
+                return False
+
+
 main()
