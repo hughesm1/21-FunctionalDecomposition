@@ -13,26 +13,15 @@ import random
 
 def main():
     mhmm = True
-    # count = 0
     while mhmm:
         print("You have 5 incorrect guesses before you lose")
         yep = ''
         anything = []
         x = rand_word()
-        # str(initial_dashes(x))
         str(dashes(x, anything))
-        # while mhmm:
         yep = loopy_loop(x, anything, yep, mhmm)
         mhmm = play_again(yep)
     print("thanks for playing")
-    # while True:
-    #     yep = loopy_loop(x, anything, yep)
-    #     if yep != '':
-    #         if play_again(yep) == False:
-    #             print('ok bye')
-    #             break
-
-
 
 
 def loopy_loop(x, anything, yep, mhmm):
