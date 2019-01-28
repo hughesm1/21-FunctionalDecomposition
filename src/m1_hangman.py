@@ -33,6 +33,7 @@ def loopy_loop(x, anything, yep, mhmm, incorrect):
         for h in range(len(kval)):
             anything = anything + [kval[h]]
         dash = dashes(x, anything)
+        make_string(dash)
         print('you have ', count, ' incorrect guesses, you have, ', incorrect-count, ' guesses left before you lose')
         if finished(dash, x):
             yep = input('congrats you won, do you want to play again(y,n)')
@@ -81,7 +82,6 @@ def dashes(word, anything):
     for u in range(len(anything)):
         index = anything[u]
         dash[index] = word[index]
-    print(str(dash))
     return dash
 
 
@@ -111,6 +111,13 @@ def play_again(yep):
                 return True
             elif wow == 'n':
                 return False
+
+
+def make_string(dash):
+    stringy = ''
+    for k in range(len(dash)):
+        stringy = stringy + dash[k] + ' '
+    print(stringy)
 
 
 main()
