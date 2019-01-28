@@ -14,30 +14,31 @@ import random
 def main():
     mhmm = True
     while mhmm:
-        print("You have 5 incorrect guesses before you lose")
+        min_length = int(input('what minimum length of a word do you want?'))
+        incorrect = int(input('how many incorrect guesses do you want to have before you lose?'))
+        print("You have ", incorrect, " incorrect guesses before you lose")
         yep = ''
         anything = []
-        x = rand_word()
+        x = check_length(min_length)
         str(dashes(x, anything))
-        yep = loopy_loop(x, anything, yep, mhmm)
+        yep = loopy_loop(x, anything, yep, mhmm, incorrect)
         mhmm = play_again(yep)
     print("thanks for playing")
 
 
-def loopy_loop(x, anything, yep, mhmm):
+def loopy_loop(x, anything, yep, mhmm, incorrect):
     count = 0
     while mhmm:
         true_false, kval, count = guess(x, count)
         for h in range(len(kval)):
             anything = anything + [kval[h]]
         dash = dashes(x, anything)
-        print('you have ', count, ' incorrect guesses, you have, ', 5-count, ' guesses left before you lose')
+        print('you have ', count, ' incorrect guesses, you have, ', incorrect-count, ' guesses left before you lose')
         if finished(dash, x):
-            print("congrats, you won!")
-            yep = input('do you want to play again(y,n)')
+            yep = input('congrats you won, do you want to play again(y,n)')
             return yep
-        if count == 5:
-            print('you lose!')
+        if count == incorrect:
+            print('you lose, the word you couldnt guess was ', x)
             yep = input('do you want to play again(y,n)')
             return yep
 
@@ -50,6 +51,13 @@ def rand_word():
     r = random.randrange(0, len(words))
     word = words[r]
     return word
+
+
+def check_length(min_length):
+    while True:
+        word = rand_word()
+        if len(word) >= min_length:
+            return word
 
 
 def guess(word, count):
